@@ -42,6 +42,7 @@ public class Order implements Serializable {
     private String locale;
     private String status;
     private List<LineItem> lineItems = new ArrayList<>();
+    private boolean ShippingAddressRequired;
 
     public int getOrderId() {
         return orderId;
@@ -261,9 +262,33 @@ public class Order implements Serializable {
 
     public void initOrder(Account account, Cart cart) {
 
+
         username = account.getUsername();
         orderDate = new Date();
+        shipToFirstName = account.getFirstName();
+        shipToLastName = account.getLastName();
+        shipAddress1 = account.getAddress1();
+        shipAddress2 = account.getAddress2();
+        shipCity = account.getCity();
+        shipState = account.getState();
+        shipZip = account.getZip();
+        shipCountry = account.getCountry();
 
+        billToFirstName = account.getFirstName();
+        billToLastName = account.getLastName();
+        billAddress1 = account.getAddress1();
+        billAddress2 = account.getAddress2();
+        billCity = account.getCity();
+        billState = account.getState();
+        billZip = account.getZip();
+        billCountry = account.getCountry();
+
+        creditCard = "999 9999 9999 9999";
+        expiryDate = "12/03";
+        cardType = "Visa";
+        courier = "UPS";
+        locale = "CA";
+        status = "P";
 
         totalPrice = cart.getSubTotal();
         Iterator<CartItem> i = cart.getAllCartItems();
@@ -283,4 +308,11 @@ public class Order implements Serializable {
         lineItems.add(lineItem);
     }
 
+    public boolean isShippingAddressRequired() {
+        return ShippingAddressRequired;
+    }
+
+    public void setShippingAddressRequired(boolean shippingAddressRequired) {
+        ShippingAddressRequired = shippingAddressRequired;
+    }
 }

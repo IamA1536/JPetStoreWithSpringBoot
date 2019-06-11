@@ -9,7 +9,7 @@
 
 <div id="Content">
     <div id="BackLink">
-        <a href="/catalog/main">
+        <a href="/main">
             Return to Main Menu
         </a>
     </div>
@@ -20,10 +20,10 @@
         <table>
             <tr>
                 <th align="center" colspan="2">
-                    <font size="4">
+                    <span style="font-size: medium; ">
                         <b>Order</b>
-                    </font>
-                    <br />
+                    </span>
+                    <br/>
                     <font size="3">
                         <b th:text="${#dates.format(session.order.orderDate, 'yyyy/MM/dd hh:mm:ss')}">
 
@@ -131,7 +131,7 @@
 
         </table>
 
-        <a href="/order/confirmOrder">
+        <a href="/confirmOrder">
             <input type="submit" name="confirmed" value="confirmed">
         </a>
     </div>

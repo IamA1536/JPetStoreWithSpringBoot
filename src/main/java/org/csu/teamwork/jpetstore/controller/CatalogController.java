@@ -40,7 +40,10 @@ public class CatalogController {
     }
 
     @GetMapping("/product")
-    public String product(@ModelAttribute("productId") String productId, HttpSession session, Model model) throws Exception {
+//    @ModelAttribute("xx") 表示将前端传递过来的参数按照名称注入到对应的对象中，“xx”只是表示放到ModelMap中的key值
+//    简单点说，ModelAttribute可以一次性把一堆参数建一个类对象，然后绑定到key对应名称的对象里。
+//    这里使用@RequestParam也可以
+    public String product(@RequestParam("productId") String productId, HttpSession session, Model model) throws Exception {
 
         Product product = catalogService.getProduct(productId);
         List<Item> itemList = catalogService.getItemListByProduct(productId);

@@ -11,6 +11,7 @@ import org.csu.teamwork.jpetstore.persistence.Mapper.ItemMapper;
 import org.csu.teamwork.jpetstore.persistence.Mapper.LineItemMapper;
 import org.csu.teamwork.jpetstore.persistence.Mapper.OrderMapper;
 import org.csu.teamwork.jpetstore.persistence.Mapper.SequenceMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -24,18 +25,22 @@ import java.util.Map;
 @Service
 public class OrderService {
 
-    private SqlSessionFactory sqlSessionFactory;
+    @Autowired
+    private OrderMapper orderMapper;
 
+    @Autowired
+    private ItemMapper itemMapper;
+
+    @Autowired
+    private LineItemMapper lineItemMapper;
+
+    @Autowired
+    private SequenceMapper sequenceMapper;
 
     public OrderService() {
     }
 
-    public void insertOrder(Order order) throws Exception {
-        sqlSessionFactory = SessionFactoryUtil.getSqlSessionFactory();
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        ItemMapper itemMapper = sqlSession.getMapper(ItemMapper.class);
-        OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
-        LineItemMapper lineItemMapper = sqlSession.getMapper(LineItemMapper.class);
+    public void insertOrder(Order order) {
 
 
         for (int i = 0; i < order.getLineItems().size(); i++) {
@@ -43,10 +48,14 @@ public class OrderService {
             String itemId = lineItem.getItemId();
 
             Integer increment = lineItem.getQuantity();
+
+            Item item = itemMapper.getItem(itemId);
+            item.setQuantity(itemMapper.getInventoryQuantity(itemId));
+            lineItem.setItem(item);
+
             Map<String, Object> param = new HashMap<>(2);
             param.put("itemId", itemId);
             param.put("increment", increment);
-            System.out.println(increment);
             itemMapper.updateInventoryQuantity(param);
         }
 
@@ -59,12 +68,7 @@ public class OrderService {
         }
     }
 
-    public Order getOrder(int orderId) throws Exception {
-        sqlSessionFactory = SessionFactoryUtil.getSqlSessionFactory();
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        ItemMapper itemMapper = sqlSession.getMapper(ItemMapper.class);
-        OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
-        LineItemMapper lineItemMapper = sqlSession.getMapper(LineItemMapper.class);
+    public Order getOrder(int orderId) {
 
 
         Order order = orderMapper.getOrder(orderId);
@@ -81,16 +85,12 @@ public class OrderService {
     }
 
     public List<Order> getOrdersByUsername(String username) throws Exception {
-        sqlSessionFactory = SessionFactoryUtil.getSqlSessionFactory();
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+
         return orderMapper.getOrdersByUsername(username);
     }
 
     public int getNextId(String name) throws Exception {
-        sqlSessionFactory = SessionFactoryUtil.getSqlSessionFactory();
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        SequenceMapper sequenceMapper = sqlSession.getMapper(SequenceMapper.class);
+
         Sequence sequence = new Sequence(name, -1);
         sequence = sequenceMapper.getSequence(sequence);
         if (sequence == null) {

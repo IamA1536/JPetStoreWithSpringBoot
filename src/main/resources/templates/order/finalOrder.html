@@ -14,7 +14,7 @@
     </ul>
 
     <div id="BackLink">
-        <<a href="/catalog/main">Return to Main Menu</a>
+        <<a href="/main">Return to Main Menu</a>
     </div>
 
     <div id="Catalog">
@@ -165,37 +165,38 @@
                             <th>Total Cost</th>
                         </tr>
 
-                            <tr th:each="lineItem:${session.order.lineItems}">
-                                <td>
-                                    <a th:href="@{/catalog/item(itemId=${lineItem.item.itemId})}" th:text=" ${lineItem.item.itemId}">
-                                        ${lineItem.item.itemId}
-                                    </a>
-                                </td>
-                                <td th:if="${lineItem.item != null}" th:text="${lineItem.item.attribute1}?:''+' '+
+                        <tr th:each="lineItem:${session.order.lineItems}">
+                            <td>
+                                <a th:text=" ${lineItem.item.itemId}">
+                                    ${lineItem.item.itemId}
+                                </a>
+                            </td>
+                            <td th:if="${lineItem.item != null}" th:text="${lineItem.item.attribute1}?:''+' '+
                                         ${lineItem.item.attribute2}+' '+
                                         ${lineItem.item.attribute3}+' '+
                                         ${lineItem.item.attribute4}+' '+
                                         ${lineItem.item.attribute5}+' '+
                                         ${lineItem.item.product.name}">
-                                </td>
+                            </td>
 
-                                <td th:if="${lineItem.item == null}">
-                                    <i>
-                                        {description unavailable}
-                                    </i>
-                                </td>
-                                <td th:text="${lineItem.quantity}">
-                                    ${lineItem.quantity}
-                                </td>
-                                <td th:text="'$'+${#numbers.formatDecimal(lineItem.unitPrice, 1,2)}">
-                                </td>
-                                <td th:text="'$'+${#numbers.formatDecimal(lineItem.total, 1,2)}">
+                            <td th:if="${lineItem.item == null}">
+                                <i>
+                                    {description unavailable}
+                                </i>
+                            </td>
+                            <td th:text="${lineItem.quantity}">
+                                ${lineItem.quantity}
+                            </td>
+                            <td th:text="'$'+${#numbers.formatDecimal(lineItem.unitPrice, 1,2)}">
+                            </td>
+                            <td th:text="'$'+${#numbers.formatDecimal(lineItem.total, 1,2)}">
 
-                                </td>
-                            </tr>
+                            </td>
+                        </tr>
 
                         <tr>
-                            <th colspan="5" th:text="'Total: $'+${#numbers.formatDecimal(session.order.totalPrice, 1,2)}">
+                            <th colspan="5"
+                                th:text="'Total: $'+${#numbers.formatDecimal(session.order.totalPrice, 1,2)}">
 
                             </th>
                         </tr>

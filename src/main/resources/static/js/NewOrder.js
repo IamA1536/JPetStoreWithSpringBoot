@@ -13,7 +13,6 @@ function prepareShip() {
 
 function changeShip() {
     $("table.shiptable").show(1500, function () {
-
     })
 
     $("table.shiptable").after("<div hidden='hidden'><a id='cancel' class='Button'>cancel</a></div>")

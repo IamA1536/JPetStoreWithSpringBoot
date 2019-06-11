@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/template_head::head('Mypetstore Main')">
+
+</head>
+<body>
+<header th:replace="common/template_menu::header">
+
+</header>
+<a href="/viewLoginForm" th:text="${session.message}">
+</a>
+<a href="main">Return to main</a>
+
+
+<footer th:replace="common/template_menu::footer">
+
+</footer>
+</body>
+</html>

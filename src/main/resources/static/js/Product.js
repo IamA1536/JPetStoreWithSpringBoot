@@ -1,8 +1,11 @@
 $(document).ready(function () {
     $("a#product.Button").click(function () {
-        $("table#choiceWindow").slideDown(300);
+        // <input type="hidden" th:value="${item.itemId}" id="itemId"/>
+        var str = "table." + $(this).text()
+        console.log(str)
+        $(str).slideDown(300);
         $("div#backGround").show();
-        $("table#choiceWindow").click(function () {
+        $(str).click(function () {
             $(this).slideUp(300);
             $("div#backGround").hide();
         })

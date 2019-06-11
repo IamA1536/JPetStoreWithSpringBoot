@@ -14,4 +14,9 @@ public class IndexController {
     public String viewIndex() {
         return "index";
     }
+
+    @GetMapping("/help")
+    public String help() {
+        return "help";
+    }
 }

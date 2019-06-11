@@ -45,7 +45,7 @@
 
                 </td>
                 <td>
-                    <a class="Button" th:href="@{/cart/cart(workingItemId=${item.itemId})}">Add to Cart</a>
+                    <a class="Button" th:href="@{/cart(workingItemId=${item.itemId})}">Add to Cart</a>
                 </td>
             </tr>
 
@@ -55,7 +55,7 @@
             </tr>
             <tr th:each="item:${itemList}">
                 <div>
-                    <table id="choiceWindow">
+                    <table id="choiceWindow" th:class="${item.itemId}" >
                         <tr>
                             <td th:utext="${item.getProduct().getDescription()}">
                                 <!--   th:utext 是会解析图片的  -->
@@ -97,7 +97,7 @@
 
                         <tr>
                             <td>
-                                <a class="Button" th:href="@{/cart/cart(workingItemId=${item.itemId})}">Add to Cart</a>
+                                <a class="Button" th:href="@{/cart(workingItemId=${item.itemId})}">Add to Cart</a>
                             </td>
                         </tr>
                     </table>

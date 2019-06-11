@@ -46,7 +46,6 @@ public class AccountController {
             model.addAttribute("account", account);
             return "catalog/main";
         } else {
-            // 清空account
             model.addAttribute("account", null);
             return "account/login";
         }
@@ -87,7 +86,7 @@ public class AccountController {
         return "account/register";
     }
 
-    @PostMapping("/editAccount")
+    @GetMapping("/editAccount")
     public String editAccount(HttpSession session) {
         List<String> languages = new ArrayList<String>();
         languages.add("english");
@@ -106,6 +105,7 @@ public class AccountController {
     }
 
 
+    //@Valid 结构体要用
     @PostMapping("/confirmEdit")
     public String confirmEdit(@Valid Account account, Model model, HttpSession session) throws Exception {
         if (!account.getPassword().equals("") && !account.getRepeatedPassword().equals("") && account.getPassword().equals(account.getRepeatedPassword())) {
@@ -137,7 +137,6 @@ public class AccountController {
         }
         out.flush();
         out.close();
-
     }
 
 }
