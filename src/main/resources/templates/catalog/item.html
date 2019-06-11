@@ -26,13 +26,14 @@
                     <tr>
                         <td>
                             <b>
-                                <font size="4" th:text="${item.attribute1==null?'':item.attribute1}+' '+${item.attribute2==null?'':item.attribute2}
+                                <span th:text="${item.attribute1==null?'':item.attribute1}+' '+${item.attribute2==null?'':item.attribute2}
                                 +' '+${item.attribute3==null?'':item.attribute3}+' '+${item.attribute4==null?'':item.attribute4}
-                                +' '+${item.attribute5==null?'':item.attribute5}+' '+${product.name==null?'':product.name}">
+                                +' '+${item.attribute5==null?'':item.attribute5}+' '+${product.name==null?'':product.name}"
+                                      style="font-size: medium; ">
                                     ${sessionScope.item.attribute1}${sessionScope.item.attribute2}
                                     ${sessionScope.item.attribute3}${sessionScope.item.attribute4}
                                     ${sessionScope.item.attribute5}${sessionScope.product.name}
-                                </font>
+                                </span>
                             </b>
                         </td>
                     </tr>

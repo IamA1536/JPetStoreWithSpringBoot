@@ -23,7 +23,7 @@
                 Sign Out
             </a>
             <img align="middle" src="/images/separator.gif" th:if="${session.account!=null}"/>
-            <a href="/account/editAccount" th:if="${session.account!=null}" th:text="#{myAccount}">
+            <a href="/editAccount" th:if="${session.account!=null}" th:text="#{myAccount}">
                  Account
             </a>
 
