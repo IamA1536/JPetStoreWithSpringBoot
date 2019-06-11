@@ -145,10 +145,11 @@ function removeChange() {
 }
 
 function changeStatus() {
-    flag = false
+
     $("#Remove").parent().after("<td hidden='hidden'><a id='cancel' class='Button'>cancel</a></td>")
     $("#cancel").parent().show(1500, function () {
     })
+    flag = false
     $("#cancel").click(function () {
         var $r = $("#cancel").parent()
         $r.animate({

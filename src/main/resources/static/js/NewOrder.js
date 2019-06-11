@@ -1,23 +1,27 @@
+var flag = true
 $(document).ready(function () {
     prepareShip()
 })
 
 function prepareShip() {
-    $("table.shiptable").hide()
     $("a#shippingAddress").click(function () {
-        $("tr.ship").hide(1000, function () {
-        })
-        changeShip()
+        if (flag) {
+            $("tr.ship").hide(1000, function () {
+            })
+            changeShip()
+        }
     })
 }
 
 function changeShip() {
+
     $("table.shiptable").show(1500, function () {
     })
 
     $("table.shiptable").after("<div hidden='hidden'><a id='cancel' class='Button'>cancel</a></div>")
     $("a#cancel").parent().show(1000, function () {
     })
+    flag = true
     $("a#cancel").click(function () {
         var $r = $("#cancel").parent()
         $r.animate({
@@ -30,5 +34,6 @@ function changeShip() {
             $("tr.ship").show(1000, function () {
             })
         })
+        flag = false
     })
 }
